@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AsideBar_Header from "./components/Asidebar_Header";
 import UploadDocument from "./components/UploadDocument";
 import VerifyDoc from "./components/verifydoc";
+import CompanyCreation from "./components/CompanyCreation";
+import DocumentList from "./components/DocumentList";
 import "./App.css";
 
 
@@ -28,9 +30,11 @@ function App() {
             {/* Route for Login */}
             <Route path="/UploadDocument" element={< UploadDocument/>} />
               <Route path="/verifydoc" element={< VerifyDoc />} />
+              <Route path="/CompanyCreation" element={< CompanyCreation/>} />
+              <Route path="/DocumentList" element={<DocumentList/>} />
 
             {/* Fallback route for unmatched paths */}
-            
+              
           </Routes>
         </main>
       </div>

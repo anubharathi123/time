@@ -3,16 +3,16 @@ import './header.css';
 
 const App = () => {
     return (
-        <div style={{ background: "rgb(248, 249, 250)" }}>
+        <div style={{ background: "rgb(248, 249, 250)", minHeight: "100vh" }}>
             <Header />
         </div>
     );
 };
 
 const Header = () => {
-    const [activeDropdown, setActiveDropdown] = useState(null); // Tracks which dropdown is open
     const [query, setQuery] = useState(""); // State for search input
     const [suggestions, setSuggestions] = useState([]); // State for suggestions
+    const [activeDropdown, setActiveDropdown] = useState(null); // Tracks which dropdown is open
 
     const notifications = [
         "New announcement created",
@@ -47,54 +47,37 @@ const Header = () => {
     };
 
     return (
-        <div className="tab">
-            {/* Search Button */}
-            <button
-                type="button"
-                className="searchbtn"
-                onClick={() => setActiveDropdown(activeDropdown === "search" ? null : "search")}
-            >
-                <img
-                    src={require('./images/search_icon.png')}
-                    alt="Search"
-                    className="search_icon"
-                />
-            </button>
-
+        <div className="header-container" style={{ background: "#0b3041", marginLeft:"240px",padding: "10px", width:"1106px", height:"60px", boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}>
             {/* Search Bar with Suggestions */}
-            {activeDropdown === "search" && (
-                <div className="search-bar-container">
-                    <input
-                        type="text"
-                        value={query}
-                        onChange={handleSearchInput}
-                        placeholder="Search..."
-                        className="search-input"
-                    />
+            <div className="search-bar-container">
+                <input
+                    type="text"
+                    value={query}
+                    onChange={handleSearchInput}
+                    className="search-input"
+                />
+                <img src={require ('./images/search_icon.png')} alt="search_icon" className="search_icon"></img>
+                {suggestions.length > 0 && (
+                    <ul className="search-suggestions">
+                        {suggestions.map((suggestion, index) => (
+                            <li
+                                key={index}
+                                className="suggestion-item"
+                                onClick={() => {
+                                    setQuery(suggestion);
+                                    setSuggestions([]);
+                                }}
+                            >
+                                {suggestion}
+                            </li>
+                        ))}
+                    </ul>
+                )}
 
-                    {suggestions.length > 0 && (
-                        <ul className="search-suggestions">
-                            {suggestions.map((suggestion, index) => (
-                                <li
-                                    key={index}
-                                    className="suggestion-item"
-                                    onClick={() => {
-                                        setQuery(suggestion);
-                                        setSuggestions([]);
-                                        setActiveDropdown(null);
-                                    }}
-                                >
-                                    {suggestion}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-
-                    {query && suggestions.length === 0 && (
-                        <p className="no-suggestions">No suggestions found</p>
-                    )}
-                </div>
-            )}
+                {query && suggestions.length === 0 && (
+                    <p className="no-suggestions">No suggestions found</p>
+                )}
+            </div>
 
             {/* Notification Button */}
             <button
@@ -128,12 +111,11 @@ const Header = () => {
                     </ul>
                 </div>
             )}
-
             {/* Profile Button */}
             <button
                 type="button"
                 className="profilebtn"
-                onClick={() => setActiveDropdown(activeDropdown === "profile" ? null : "profile")}
+                onClick={() => alert("Profile clicked!")}
             >
                 <img
                     src={require('./images/candidate-profile.png')}
@@ -141,21 +123,6 @@ const Header = () => {
                     className="profile-image"
                 />
             </button>
-
-            {/* Profile Dropdown */}
-            {activeDropdown === "profile" && (
-                <div className="profile-dropdown">
-                    <p><b>Name:</b> John Doe</p>
-                    <p><b>Email:</b> john.doe@example.com</p>
-                    <button
-                        type="button"
-                        className="signout-button"
-                        onClick={() => alert("Sign Out Clicked")}
-                    >
-                        Sign Out
-                    </button>
-                </div>
-            )}
         </div>
     );
 };

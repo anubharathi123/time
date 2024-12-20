@@ -1,8 +1,8 @@
 .upload-document-container {
-  width: 1150px;
-  margin: 65px -1150px;
+  width: 1115px;
+  margin: 80px -1120px;
   position:absolute;
-  height: 540px;
+  height: 520px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -23,8 +23,8 @@
 h4 {
   font-size: 18px;
   color: #333;
-  margin-left: 277px;
-  margin-top: 6px;
+  margin-left: 289px;
+  margin-top: 24px;
   margin-right: 20px;
 
 }

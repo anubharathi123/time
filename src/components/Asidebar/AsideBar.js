@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import UploadDocument from '../UploadDocument';
-import VerifyDoc from '../verifydoc';
 import './AsideBar.css';
 
 const AsideBar = () => {
@@ -44,6 +42,8 @@ const AsideBar = () => {
             alt="Company Logo"
             style={{
               width: '100px',
+              marginTop: '-50px',
+              marginLeft: '27px',
               height: 'auto',
               filter: 'drop-shadow(2px 1px 0 rgb(255, 255, 255)) drop-shadow(-1px -1px 0 rgb(255, 255, 255)) drop-shadow(1px 1px 1px rgb(255, 255, 255))',
             }}
@@ -55,13 +55,13 @@ const AsideBar = () => {
           {/* Profile Dropdown */}
           <li className={`dropdown ${openDropdowns.profile ? 'open' : ''}`}>
             <NavLink onClick={() => toggleDropdown('profile')} to="Profile" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Profile</p>
+              <p className='profiletab'>Profile</p>
               {renderDropdownIcon('profile')}
             </NavLink>
             {openDropdowns.profile && (
               <ul className="dropdown-menu">
                 <li>
-                  <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  <NavLink style={{ marginLeft:"13px", width:"170px" }}to="/login" className={({ isActive }) => (isActive ? 'active' : '')}>
                     Profile Management
                   </NavLink>
                 </li>
@@ -72,30 +72,30 @@ const AsideBar = () => {
           {/* Dashboard Dropdown */}
           <li className={`dropdown ${openDropdowns.dashboard ? 'open' : ''}`}>
             <NavLink onClick={() => toggleDropdown('dashboard')} to="Dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Dashboard</p>
+              <p style={{ marginLeft:"15px" }}>Dashboard</p>
               {renderDropdownIcon('dashboard')}
             </NavLink>
             {openDropdowns.dashboard && (
               <ul className="dropdown-menu">
                 <li>
-                  <NavLink to="/audit-log" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  <NavLink  style={{ marginLeft:"18px", width:"170px", marginBottom:"-8px" }} to="/audit-log" className={({ isActive }) => (isActive ? 'active' : '')}>
                     Audit Log
                   </NavLink>
                 </li>
                 <li>
-                <NavLink onClick={() => toggleDropdown('document', true)} to="#" className={({ isActive }) => ''}>
+                <NavLink  style={{ marginLeft:"18px", marginBottom:"10px" }} onClick={() => toggleDropdown('document', true)} to="#" className={({ isActive }) => ''}>
                  Document {renderDropdownIcon('document')}
                 </NavLink>
                   {openDropdowns.document && (
                     <ul className="dropdown-menu">
                       <li>
-                        <NavLink to="/document-creation" className={({ isActive }) => (isActive ? 'active' : '')}>
-                          Document Creation
+                        <NavLink style={{ marginLeft:"18px", width:"170px" }} to="/document-creation" className={({ isActive }) => (isActive ? 'active' : '')}>
+                          Document Creation 
                         </NavLink>
                       </li>
                       <li>
-                        <NavLink to="/document-list" className={({ isActive }) => (isActive ? 'active' : '')}>
-                          Document List
+                        <NavLink onClick={() => toggleDropdown('DocumentList')} style={{ marginLeft:"18px", width:"170px", marginBottom:"-22px" }} to="DocumentList" className={({ isActive }) => (isActive ? 'active' : '')}>
+                          Document List 
                         </NavLink>
                       </li>
                     </ul>
@@ -103,18 +103,18 @@ const AsideBar = () => {
                 </li>
               
                 <li className={`dropdown ${openDropdowns.announcement ? 'open' : ''}`}>
-                  <NavLink onClick={() => toggleDropdown('announcement', true )} to="#"className={({ isActive }) => ''}>
+                  <NavLink style={{ marginLeft:"18px" , marginBottom:"10px" }} onClick={() => toggleDropdown('announcement', true )} to="#"className={({ isActive }) => ''}>
                     Announcement {renderDropdownIcon('announcement')}
                   </NavLink>
                   {openDropdowns.announcement && (
                     <ul className="dropdown-menu">
                       <li>
-                        <NavLink to="/announcement-creation" className={({ isActive }) => (isActive ? 'active' : '')}>
+                        <NavLink style={{ marginLeft:"18px", width:"190px" }}to="/announcement-creation" className={({ isActive }) => (isActive ? 'active' : '')}>
                           Announcement Creation
                         </NavLink>
                       </li>
                       <li>
-                        <NavLink to="/announcement-list" className={({ isActive }) => (isActive ? 'active' : '')}>
+                        <NavLink style={{ marginLeft:"18px", width:"180px" }}to="/announcement-list" className={({ isActive }) => (isActive ? 'active' : '')}>
                           Announcement List
                         </NavLink>
                       </li>
@@ -128,13 +128,13 @@ const AsideBar = () => {
           {/* Create Admin Dropdown */}
           <li className={`dropdown ${openDropdowns['create-admin'] ? 'open' : ''}`}>
             <NavLink onClick={() => toggleDropdown('create-admin')} to="create admin" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Create Admin</p>
+              <p style={{ marginLeft:"15px" }}>Create Admin</p>
               {renderDropdownIcon('create-admin')}
             </NavLink>
             {openDropdowns['create-admin'] && (
               <ul className="dropdown-menu">
                 <li>
-                  <NavLink to="/admin-list" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  <NavLink style={{ marginLeft:"20px", width:"160px" }} to="/admin-list" className={({ isActive }) => (isActive ? 'active' : '')}>
                     Admin List
                   </NavLink>
                 </li>
@@ -143,15 +143,23 @@ const AsideBar = () => {
           </li>
 
           {/* Organization Dropdown */}
-          <li className={`dropdown ${openDropdowns.organization ? 'open' : ''}`}>
-            <NavLink onClick={() => toggleDropdown('organization')} to="company-creation" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Organization</p>
-              {renderDropdownIcon('organization')}
+          <li className={`dropdown ${openDropdowns.CompanyCreation ? 'open' : ''}`}>
+            <NavLink
+              onClick={() => toggleDropdown('CompanyCreation')}
+              to="CompanyCreation"
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              <p style={{ marginLeft: '15px' }}>Organization</p>
+              {renderDropdownIcon('CompanyCreation')}
             </NavLink>
-            {openDropdowns.organization && (
+            {openDropdowns.CompanyCreation && (
               <ul className="dropdown-menu">
                 <li>
-                  <NavLink to="/organization-list" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  <NavLink
+                    style={{ marginLeft: '20px', width: '160px' }}
+                    to="/organization-list"
+                    className={({ isActive }) => (isActive ? 'active' : '')}
+                  >
                     Organization List
                   </NavLink>
                 </li>
@@ -162,13 +170,13 @@ const AsideBar = () => {
           {/* Document Upload Dropdown */}
           <li className={`dropdown ${openDropdowns['UploadDocument'] ? 'open' : ''}`}>
             <NavLink onClick={() => toggleDropdown('UploadDocument')} to="UploadDocument" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Document upload</p>
+              <p style={{ marginLeft:"15px" }} >Document upload</p>
               {renderDropdownIcon('UploadDocument')}
             </NavLink>
             {openDropdowns['UploadDocument'] && (
               <ul className="dropdown-menu">
-                <li>
-                  <NavLink to="/document-list" className={({ isActive }) => (isActive ? 'active' : '')}>
+                <li className={`dropdown ${openDropdowns['DocumentList'] ? 'open' : ''}`}>
+                  <NavLink onClick={() => toggleDropdown('DocumentList')} style={{ marginLeft:"20px", width:"160px" }} to="DocumentList" className={({ isActive }) => (isActive ? 'active' : '')}>
                     Document List
                   </NavLink>
                 </li>
@@ -179,34 +187,44 @@ const AsideBar = () => {
           {/* Other Menu Items */}
           <li>
             <NavLink to="/settings" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Settings</p>
+              <p style={{ marginLeft:"15px" }} >Settings</p>
             </NavLink>
           </li>
           <li>
             <NavLink to="/employee-creation" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Create User</p>
+              <p style={{ marginLeft:"15px" }} >Create User</p>
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/documentview" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Document View</p>
+          <li className={`dropdown ${openDropdowns['DocumentList'] ? 'open' : ''}`}>
+            <NavLink onClick={() => toggleDropdown('DocumentList')} to="DocumentList" className={({ isActive }) => (isActive ? 'active' : '')}>
+              <p style={{ marginLeft:"15px" }} >Document View</p>
             </NavLink>
           </li>
           <li className={`dropdown ${openDropdowns.VerifyDoc ? 'open' : ''}`}>
-            <NavLink onClick={() => toggleDropdown('VerifyDoc?')} to="VerifyDoc" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <p>Verify Document</p>
-              {renderDropdownIcon('VerifyDoc')}
-            </NavLink>
-            {openDropdowns.verifydocument && (
-              <ul className="dropdown-menu">
-                <li>
-                  <NavLink to="/document-list" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Document List
-                  </NavLink>
-                </li>
-              </ul>
-            )}
-          </li>
+          <NavLink
+            onClick={() => toggleDropdown('VerifyDoc')}
+            to="/VerifyDoc"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+          <p style={{ marginLeft: "15px" }}>Verify Document</p>
+          {renderDropdownIcon('VerifyDoc')}
+          </NavLink>
+          {openDropdowns.VerifyDoc && (
+            <ul className="dropdown-menu">
+            <li className={`dropdown ${openDropdowns['DocumentList'] ? 'open' : ''}`}>
+              <NavLink
+                onClick={() => toggleDropdown('DocumentList')}
+                style={{ marginLeft:"20px", width:"160px" }}
+                to="DocumentList"
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+            Document List
+          </NavLink>
+        </li>
+    </ul>
+  )}
+</li>
+
         </ul>
       </nav>
     </aside>
